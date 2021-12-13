@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="client.Controller"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <TextArea fx:id="output" layoutX="14.0" layoutY="14.0" prefHeight="335.0" prefWidth="568.0"/>
+    <TextField fx:id="input" onAction="#sendMessage" layoutX="14.0" layoutY="349.0" prefHeight="38.0" prefWidth="568.0"/>
+
+</AnchorPane>
