@@ -2,12 +2,10 @@ package server;
 
 import java.io.*;
 import java.net.Socket;
-import java.nio.Buffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class Handler implements Runnable {
@@ -61,6 +59,12 @@ public class Handler implements Runnable {
                         }
                     }
                     sendServerFiles();
+                } else if (command.equals("#download#")){
+                    String file = is.readUTF();
+                    Path filePath = currentDir.resolve(file);
+                    os.writeLong(Files.size(filePath));
+                    os.write(Files.readAllBytes(filePath));
+                    os.flush();
                 }
             }
         } catch (Exception e) {

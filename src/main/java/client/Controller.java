@@ -2,6 +2,7 @@ package client;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
@@ -19,7 +20,8 @@ import javafx.scene.control.ListView;
 
 
 public class Controller implements Initializable {
-
+    private static final int BUFFER_SIZE = 8192;
+    private byte[] buffer;
     private Path baseDir;
     private DataInputStream is;
     private DataOutputStream os;
@@ -77,8 +79,26 @@ public class Controller implements Initializable {
         os.flush();
     }
 
-//    public void download(ActionEvent actionEvent) {
-//        String file = serverFiles.getSelectionModel().getSelectedItem();
-//
-//    }
+    public void download(ActionEvent actionEvent) throws IOException {
+        buffer = new byte[BUFFER_SIZE];
+        String file = serverFiles.getSelectionModel().getSelectedItem();
+        os.writeUTF("#download#");
+        os.writeUTF(file);
+        long size = is.readLong();
+        try (FileOutputStream fos = new FileOutputStream(
+                baseDir.resolve(file).toFile())) {
+            for (int i = 0; i < (size + BUFFER_SIZE - 1) / BUFFER_SIZE; i++) {
+                int read = is.read(buffer);
+                fos.write(buffer, 0, read);
+            }
+        }
+        Platform.runLater(() -> clientFiles.getItems().clear());
+        Platform.runLater(()-> {
+            try {
+                clientFiles.getItems().addAll(getFileNames());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 }
