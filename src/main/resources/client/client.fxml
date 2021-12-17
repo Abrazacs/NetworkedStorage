@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="client.Controller"
-            prefHeight="400.0" prefWidth="600.0">
-
-    <TextArea fx:id="output" layoutX="14.0" layoutY="14.0" prefHeight="335.0" prefWidth="568.0"/>
-    <TextField fx:id="input" onAction="#sendMessage" layoutX="14.0" layoutY="349.0" prefHeight="38.0" prefWidth="568.0"/>
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.Controller">
+    <ListView fx:id="clientFiles" layoutX="15.0" layoutY="38.0" prefHeight="300.0" prefWidth="288.0"/>
+    <ListView fx:id="serverFiles" layoutX="317.0" layoutY="38.0" prefHeight="300.0" prefWidth="274.0" />
+    <Button layoutX="317.0" layoutY="356.0" mnemonicParsing="false" onAction="#upload" prefHeight="27.0" prefWidth="274.0" text="upload" />
+    <Button layoutX="15.0" layoutY="356.0" mnemonicParsing="false" onAction="#download" prefHeight="27.0" prefWidth="288.0" text="download" />
 </AnchorPane>
